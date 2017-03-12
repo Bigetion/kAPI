@@ -1,0 +1,165 @@
+<!doctype html>
+<html ng-app="newAarApp" ng-controller="AppCtrl">
+
+<head>
+    <meta charset="utf-8">
+    <title>AAR Framework</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="components/angular-ui-notification/dist/angular-ui-notification.css" />
+    <link rel="stylesheet" href="components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="components/select2/select2.css" />
+    <link rel="stylesheet" href="components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="components/perfect-scrollbar/src/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="components/ng-scrollbar/dist/ng-scrollbar.css" />
+    <link rel="stylesheet" href="components/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="components/angular-loading-bar/build/loading-bar.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/main.css -->
+    <!--<link rel="stylesheet" href="styles/main.css">-->
+    <link rel="stylesheet" href="styles/css/main.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="styles/css/skin.css" type="text/css" media="screen" />
+    <!--<link rel="stylesheet" href="styles/css/sb-admin-2.css" type="text/css" media="screen" />-->
+    <!--<link rel="stylesheet" href="styles/select2.css" />-->
+    <!-- endbuild -->
+</head>
+
+<body class="hold-transition skin-blue layout-top-nav">
+    <div ui-view="login" ng-if="currentState=='login'" class="login-page"></div>
+    <div class="wrapper" ng-if="currentState!='login'">
+        <header class="main-header">
+            <nav class="navbar navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a href="#" class="logo"><img src="styles/img/aar32.png"> AAR Framework</a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <i class="fa fa-bars"></i>
+              </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="{{currentState=='main' ? 'active':''}}"><a href="" ui-sref="main()">Modules</a></li>
+                            <li class="{{currentState=='roles' ? 'active':''}}"><a href="" ui-sref="roles()">Roles</a></li>
+                            <li class="{{currentState=='permissions' ? 'active':''}}"><a href="" ui-sref="permissions()">Permissions</a></li>
+                            <li class="{{currentState=='users' ? 'active':''}}"><a href="" ui-sref="users()">Users</a></li>
+                            <li ng-click="onLoad().logout()"><a href="">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <div class="content-wrapper">
+            <div class="container">
+                <section class="content">
+                    <div class="row" ui-view="content"></div>
+                </section>
+            </div>
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.0
+            </div>
+            <strong>Copyright © 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        </footer>
+    </div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="components/jquery/dist/jquery.js"></script>
+    <script src="components/angular/angular.js"></script>
+    <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="components/angular-animate/angular-animate.js"></script>
+    <script src="components/angular-aria/angular-aria.js"></script>
+    <script src="components/angular-cookies/angular-cookies.js"></script>
+    <script src="components/angular-resource/angular-resource.js"></script>
+    <script src="components/angular-route/angular-route.js"></script>
+    <script src="components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="components/angular-touch/angular-touch.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="components/angular-messages/angular-messages.js"></script>
+    <script src="components/angular-material/angular-material.js"></script>
+    <script src="components/angular-smart-table/dist/smart-table.js"></script>
+    <script src="components/angular-ui-notification/dist/angular-ui-notification.js"></script>
+    <script src="components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="components/angular-ui-select/dist/select.js"></script>
+    <script src="components/select2/select2.js"></script>
+    <script src="components/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"></script>
+    <script src="components/ng-scrollbars/dist/scrollbars.min.js"></script>
+    <script src="components/slimScroll/jquery.slimscroll.js"></script>
+    <script src="components/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="components/angular-slimscroll/angular-slimscroll.js"></script>
+    <script src="components/pdfmake/build/pdfmake.js"></script>
+    <script src="components/pdfmake/build/vfs_fonts.js"></script>
+    <script src="components/lodash/lodash.js"></script>
+    <script src="components/ng-lodash/build/ng-lodash.js"></script>
+    <script src="components/ngstorage/ngStorage.js"></script>
+    <script src="components/perfect-scrollbar/src/perfect-scrollbar.js"></script>
+    <script src="components/ng-scrollbar/dist/ng-scrollbar.js"></script>
+    <script src="components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js"></script>
+    <script src="components/metisMenu/dist/metisMenu.js"></script>
+    <script src="components/angular-classy/angular-classy.js"></script>
+    <script src="components/angular-loading-bar/build/loading-bar.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/routes.js"></script>
+    <script src="scripts/root/controllers/appCtrl.js"></script>
+
+    <script src="scripts/root/controllers/mainCtrl.js"></script>
+    <script src="scripts/root/services/mainService.js"></script>
+
+    <script src="scripts/root/controllers/roleCtrl.js"></script>
+    <script src="scripts/root/services/roleService.js"></script>
+
+    <script src="scripts/root/controllers/userCtrl.js"></script>
+    <script src="scripts/root/services/userService.js"></script>
+
+    <script src="scripts/root/controllers/permissionCtrl.js"></script>
+    <script src="scripts/root/services/permissionService.js"></script>
+
+    <script src="scripts/root/controllers/authCtrl.js"></script>
+    <script src="scripts/root/services/authService.js"></script>
+
+    <script src="scripts/root/services/httpService.js"></script>
+
+
+    <script src="scripts/root/directives/onlyDecimals.js"></script>
+    <script src="scripts/root/directives/accessibleForm.js"></script>
+    <script src="scripts/root/directives/mScrollbars.js"></script>
+    <script src="scripts/root/directives/uiSelectCustom.js"></script>
+
+    <script src="scripts/root/factories/converter.js"></script>
+    <script src="scripts/root/factories/exportDownload/pdf.js"></script>
+    <script src="scripts/root/factories/exportDownload/excel.js"></script>
+    <script src="scripts/root/factories/exportDownload/exportDownload.js"></script>
+
+    <!--Notif Factories-->
+    <script src="scripts/root/factories/notif/notif.js"></script>
+    <script src="scripts/root/factories/notif/controllers/confirmationModalCtrl.js"></script>
+
+    <!-- for legacy browsers we need to use compatibility.js -->
+    <script src="scripts/root/factories/pdfjs/web/compatibility.js"></script>
+    <script src="scripts/root/factories/pdfjs/build/pdf.js"></script>
+
+    <!--<script src="scripts/root/directives/select2.js"></script>-->
+    <!-- endbuild -->
+    <script src="styles/js/main.js"></script>
+</body>
+
+</html>
