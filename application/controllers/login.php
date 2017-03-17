@@ -35,7 +35,7 @@ class Login extends Main {
                     $jwtTokenDecode = $this->jwt->decode($jwtTokenEncode);
 
                     $token['jwt'] = $jwtTokenEncode;
-                    $token['jwtTokenDecode'] = $jwtTokenDecode;
+                    // $token['jwtTokenDecode'] = $jwtTokenDecode;
                     
                     $this->set->success_message(true, $token);
                 }

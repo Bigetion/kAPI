@@ -60,7 +60,7 @@ class Project {
             $bearer_pos = stripos($authorization_header, 'bearer ');
             if ($authorization_header !== false && ($bearer_pos !== false)) {
                 $jwt = & load_class('JWT');
-                $this->jwt_payload = $jwt->decode(Bearer, base64_decode(secret_key));
+                $this->jwt_payload = $jwt->decode($bearer_header_list[1], base64_decode(secret_key));
                     
                 $payload = json_decode(json_encode($this->jwt_payload), true);;
                 $username = $payload['data']['user'];

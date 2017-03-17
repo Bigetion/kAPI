@@ -68,53 +68,7 @@ class Autotable {
 							  `content` longblob NOT NULL,
 							  PRIMARY KEY (`id_page`)
 							) ENGINE=MyISAM DEFAULT CHARSET=latin1;");
-        }
-		
-		if (!in_array('posts', $tabel)) {
-            $db->exec("CREATE TABLE `posts` (
-							  `id_post` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-							  `post_author` bigint(20) unsigned NOT NULL DEFAULT '0',
-							  `id_category` varchar(50) NOT NULL DEFAULT '0',
-							  `post_title` text NOT NULL,
-							  `post_content` longtext NOT NULL,
-							  `post_description` text NOT NULL,
-							  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-							  `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-							  `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-							  `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-							  `post_image_link` text NOT NULL,
-							  `post_title_link` text NOT NULL,
-							  PRIMARY KEY (`id_post`),
-							  KEY `type_status_date` (`post_date`,`id_post`),
-							  KEY `post_author` (`post_author`)
-							)");
         }	
-		
-		if(!in_array('post_terms', $tabel)){
-			$db->exec("CREATE TABLE `post_terms` (
-							  `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-							  `name` varchar(200) NOT NULL DEFAULT '',
-							  `slug` varchar(200) NOT NULL DEFAULT '',
-							  `term_group` bigint(10) NOT NULL DEFAULT '0',
-							  PRIMARY KEY (`term_id`),
-							  UNIQUE KEY `slug` (`slug`),
-							  KEY `name` (`name`)
-							)");	
-		}
-		
-		if(!in_array('post_term_taxonomy', $tabel)){
-			$db->exec("CREATE TABLE `post_term_taxonomy` (
-							  `term_taxonomy_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-							  `term_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-							  `taxonomy` varchar(32) NOT NULL DEFAULT '',
-							  `description` longtext NOT NULL,
-							  `parent` bigint(20) unsigned NOT NULL DEFAULT '0',
-							  `count` bigint(20) NOT NULL DEFAULT '0',
-							  PRIMARY KEY (`term_taxonomy_id`),
-							  UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
-							  KEY `taxonomy` (`taxonomy`)
-							)");	
-		}		
 	}        
 
 }
