@@ -18,5 +18,22 @@ class data extends Controller {
 		}
 		$this->render->json($data);
 	}
+
+	function getImageSlider(){
+		$data['image'] = array();
+
+		$path = 'application/images/slider';
+		$imageSlider = load_recursive($path, 3, array('jpg'));
+		if(count($imageSlider)>0){
+			foreach($imageSlider as $image){
+				$type = pathinfo($path.'/'.$image, PATHINFO_EXTENSION);
+				$img = file_get_contents($path.'/'.$image);
+				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($img);
+
+				$data['image'][] = $base64;
+			}
+		}
+		$this->render->json($data);
+	}
 }
 ?>
