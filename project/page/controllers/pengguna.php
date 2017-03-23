@@ -11,6 +11,33 @@ class pengguna extends Controller {
 		$this->render->json($data);	
 	}
 
+	function getProfile(){
+		$post_data = $this->render->json_post();
+		$data['data'] = $this->db->select("users",[
+		"[>]roles" => "id_role",
+		"[>]tabel_pengguna_internal" => ["id_external"=>"id_pengguna_internal"]
+		],[
+		"users.id_user","users.id_role","users.id_external","users.username", "roles.role_name", "tabel_pengguna_internal.nama", "tabel_pengguna_internal.email", "tabel_pengguna_internal.email"
+		],["users.id_user" => $post_data['idUser']]);
+		
+		$this->render->json($data);	
+	}
+
+	function changePassword(){
+		$post_data = $this->render->json_post();
+		$user = $this->db->select("users","*",["id_user"=>$post_data['idUser']]);
+		if(password_verify($post_data['passwordOld'],$user[0]['password'])){
+			$data = array(
+				"password"	=> password_hash($post_data['passwordNew'],1)
+			);
+			if($this->db->update("users", $data, ["id_user"=>$post_data['idUser']])){
+				$this->set->success_message(true);
+			}else{
+				$this->set->error_message(true);
+			}
+		}
+	}
+
 	function getRoleOptions(){
 		$data['data'] = $this->db->select("roles","*");
         $this->render->json($data);
