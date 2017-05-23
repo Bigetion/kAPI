@@ -22,7 +22,7 @@ class Login extends Main {
 
                 try{
                     $payload = array(
-                        'jti'       => bin2hex(random_bytes(5)),
+                        'jti'       => bin2hex(mt_rand()),
                         'iat'       => time(),
                         'nbf'       => time() + 10,
                         'exp'       => time() + 7210,

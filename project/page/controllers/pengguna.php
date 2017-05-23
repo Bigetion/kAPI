@@ -43,6 +43,11 @@ class pengguna extends Controller {
         $this->render->json($data);
 	}
 
+	function getLSPROOptions(){
+		$data['data'] = $this->db->select("tabel_lspro","*");
+        $this->render->json($data);
+	}
+
 	function submitAdd(){
         $post_data = $this->render->json_post();
         $data = array(
@@ -50,16 +55,16 @@ class pengguna extends Controller {
             'email' => $post_data['email'],
         );
         if($this->db->insert("tabel_pengguna_internal", $data)){
-            $id = $this->db->id();
+            $id_pengguna_internal = $this->db->id();
             $data = array(
 				'username'		=> $post_data['namaUser'],
             	'password'  	=> password_hash($post_data['password'],1),
 				'id_role'		=> $post_data['idRole'],
-				'id_external'	=> $id
+				'id_external'	=> $id_pengguna_internal
 			);
 			if($this->db->insert("users", $data)){
-				$id = $this->db->id();
-				$this->set->success_message(true, array('id_pengguna_internal'=>$id));
+				$id_user = $this->db->id();
+				$this->set->success_message(true, array('id'=>$id_user, 'id_pengguna_internal'=>$id_pengguna_internal));
 			}
         }
     }
@@ -84,8 +89,19 @@ class pengguna extends Controller {
 	function submitDelete(){
         $post_data = $this->render->json_post();
         if($this->db->delete("users", ["id_user" => $post_data['idUser']])){
+			$this->db->delete("tabel_pengguna_internal", ["id_pengguna_internal" => $post_data['idExternal']]);
             $this->set->success_message(true);
         }
     }
+
+	function submitUpdateLSPRO(){
+		$post_data = $this->render->json_post();
+		$data = array(
+            'id_user'	=> $post_data['idUser']
+        );
+		$this->db->update("tabel_lspro", $data, ["id_lspro" => $post_data['idLSPRO']]);
+
+		$this->set->success_message(true, $this->db->log());
+	}
 }
 ?>

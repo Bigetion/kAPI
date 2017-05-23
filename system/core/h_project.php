@@ -88,9 +88,10 @@ class Project {
             }else{
                 show_error('Authentication','Bearer undefined');
             }
-        }else{
-            if (!defined('id_role')) define('id_role', 2);
         }
+
+        if (!defined('id_role')) define('id_role', 2);
+        if (!defined('id_user')) define('id_user', 2);
     }
 
     function check_permission() {        

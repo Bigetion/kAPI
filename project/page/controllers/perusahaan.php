@@ -2,9 +2,21 @@
 
 class perusahaan extends Controller {
 
+	function getLSPRO(){
+		$post_data = $this->render->json_post();
+		$data['data'] = $this->db->select("tabel_lspro", "*", array('id_user' => $post_data['idUser']));
+        $this->render->json($data);
+	}
+	
 	function getData(){
 		$post_data = $this->render->json_post();
 		$data["data"] = $this->db->select("tabel_perusahaan","*");
+		$this->render->json($data);
+	}
+
+	function getDataByLSPRO(){
+		$post_data = $this->render->json_post();
+		$data["data"] = $this->db->select("tabel_perusahaan","*", array('id_lspro' => $post_data['idLSPRO']));
 		$this->render->json($data);
 	}
 
@@ -20,6 +32,7 @@ class perusahaan extends Controller {
 			"telp" 						=> $post_data["nomorTelpon"],
 			"website" 					=> $post_data["website"],
 			"email" 					=> $post_data["email"],
+			"id_lspro" 					=> $post_data["idLSPRO"],
 		);
 		if($this->db->insert("tabel_perusahaan", $data)){
 			$this->set->success_message(true, array("id"=>$this->db->id()));

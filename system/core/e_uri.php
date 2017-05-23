@@ -6,6 +6,11 @@ class URI {
         foreach ($main_config as $key => $value) {
             define($key, $value);
         }
+
+		$database_config = include('application/config/database.php');
+        foreach ($database_config as $key => $value) {
+            define($key, $value);
+        }
 	}
 	
     function segment($nomor){

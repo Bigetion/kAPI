@@ -229,7 +229,7 @@ class DB
 			}
 		}
 		catch (PDOException $e) {
-			throw new Exception($e->getMessage());
+			show_error($e->getMessage(), false);
 		}
 	}
 
@@ -1263,7 +1263,7 @@ class DB
   public function get_table() {
         $data = $this->pdo->query('show tables')->fetchAll();  
 		foreach ($data as $value) {
-            $a[] = $value['Tables_in_' . database];
+            $a[] = $value['Tables_in_' . database_name];
         }
         return $a;
     }

@@ -1,6 +1,7 @@
 <?php
 function show_error($header = 'Page Not Found', $message = 'The page your requested was not found') {
     $data['error_message'] = $header.' : '.$message;
+    if(!$message) $data['error_message'] = $header;
     if(strtolower($header)=='authentication') $data['require_login'] = true;
 
     $header_with_payload = get_header('Access-Control-Request-Method');
